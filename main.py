@@ -5,7 +5,7 @@
 # Importing the libraries
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+
 
 # PyTorch libraries
 import torch
@@ -85,7 +85,7 @@ def predict_label(img_path):
     "9":"Ankle boot"}
     
     # preprocess image to resize image to 28 X 28 pixels and convert to a 2D tensor
-    p = transforms.Compose([transforms.Scale((28,28))])
+    p = transforms.Compose([transforms.Resize((28,28))])
     img = Image.open(img_path)
     img = p(img)
     
@@ -106,8 +106,6 @@ def predict_label(img_path):
     prediction = np.argmax(prob, axis=1)
     print(prediction)
     print(labels[str(prediction[0])])
-    plt.imshow(img)
-    plt.show()
     
     return labels[str(prediction[0])]
 ###############################################
@@ -141,4 +139,4 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8039)
+    app.run(debug=True, host='0.0.0.0', port=8083)
